@@ -20,6 +20,6 @@ jobs:
       - name: Run Python script with secret
         env:
           MY_SECRET_TOKEN: ${{ secrets.MY_SECRET_TOKEN }}
-        run: python secure_reader.py
+        run: python secret_reader.py
 
 
