@@ -1,15 +1,12 @@
-name: API ETL Pipeline
+name: Secure Secret Reader
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  etl:
+  read-secret:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,10 +15,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.14'
+          python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Run Python script with secret
+        env:
+          MY_SECRET_TOKEN: ${{ secrets.MY_SECRET_TOKEN }}
+        run: python secure_reader.py
 
-      - name: Run API ETL script
-        run: python api_reader.py
+
